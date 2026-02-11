@@ -23,6 +23,13 @@ function parseCategory(value: unknown): string {
   return normalized.length > 0 ? normalized : "General";
 }
 
+export function categoryToAnchorId(category: string): string {
+  return `category-${category
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")}`;
+}
+
 export async function getAllSlugs(): Promise<string[]> {
   const files = await fs.promises.readdir(CONTENT_DIR);
   return files

@@ -2,7 +2,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { getAllSlugs, getArticleBySlugOrNull } from "@/lib/content";
+import {
+  categoryToAnchorId,
+  getAllSlugs,
+  getArticleBySlugOrNull,
+} from "@/lib/content";
 
 export async function generateStaticParams() {
   const slugs = await getAllSlugs();
@@ -24,9 +28,26 @@ export default async function ArticlePage({ params }: Props) {
   return (
     <main className="mx-auto flex min-h-screen max-w-3xl flex-col gap-6 px-6 py-12">
       <header className="flex flex-col gap-3">
-        <p className="text-sm uppercase tracking-wide text-zinc-500">
-          {article.category} | Article
-        </p>
+        <nav aria-label="Breadcrumb" className="text-sm text-zinc-500">
+          <ol className="flex flex-wrap items-center gap-2">
+            <li>
+              <Link className="hover:text-zinc-700" href="/">
+                Home
+              </Link>
+            </li>
+            <li>/</li>
+            <li>
+              <Link
+                className="hover:text-zinc-700"
+                href={`/#${categoryToAnchorId(article.category)}`}
+              >
+                {article.category}
+              </Link>
+            </li>
+            <li>/</li>
+            <li>Article</li>
+          </ol>
+        </nav>
         <h1 className="text-3xl font-semibold leading-tight text-zinc-900">
           {article.title}
         </h1>

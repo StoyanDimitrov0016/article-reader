@@ -2,7 +2,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { getAllSlugs, getArticleBySlugOrNull } from "@/lib/content";
+import {
+  categoryToAnchorId,
+  getAllSlugs,
+  getArticleBySlugOrNull,
+} from "@/lib/content";
 
 export async function generateStaticParams() {
   const slugs = await getAllSlugs();
@@ -24,9 +28,29 @@ export default async function ListenPage({ params }: Props) {
   return (
     <main className="mx-auto flex min-h-screen max-w-3xl flex-col gap-8 px-6 py-12">
       <header className="flex flex-col gap-4">
+        <nav aria-label="Breadcrumb" className="text-sm text-zinc-500">
+          <ol className="flex flex-wrap items-center gap-2">
+            <li>
+              <Link className="hover:text-zinc-700" href="/">
+                Home
+              </Link>
+            </li>
+            <li>/</li>
+            <li>
+              <Link
+                className="hover:text-zinc-700"
+                href={`/#${categoryToAnchorId(article.category)}`}
+              >
+                {article.category}
+              </Link>
+            </li>
+            <li>/</li>
+            <li>Listen mode</li>
+          </ol>
+        </nav>
         <div className="flex flex-wrap items-center gap-3 text-sm text-zinc-500">
           <span className="rounded-full bg-zinc-100 px-3 py-1 uppercase tracking-wide">
-            {article.category} | Listen mode
+            Listen mode
           </span>
           <Link className="underline" href={`/articles/${slug}`}>
             Back to article
