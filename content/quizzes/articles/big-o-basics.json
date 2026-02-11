@@ -1,0 +1,51 @@
+{
+  "id": "quiz-big-o-basics",
+  "title": "Big O Basics Quiz",
+  "description": "Check core complexity classes and what they imply.",
+  "scope": "article",
+  "source": "big-o-basics",
+  "questions": [
+    {
+      "id": "big-o-1",
+      "question": "What does Big O primarily describe?",
+      "options": [
+        "Exact runtime on a specific machine",
+        "How runtime grows with input size",
+        "Memory usage only",
+        "Compiler optimization quality"
+      ],
+      "answerIndex": 1,
+      "explanation": "Big O describes growth trends as input size increases.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "big-o-2",
+      "question": "Which class usually appears when work is halved each step?",
+      "options": ["O(n)", "O(n^2)", "O(log n)", "O(n log n)"],
+      "answerIndex": 2,
+      "explanation": "Halving search space each step gives logarithmic time.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "big-o-3",
+      "question": "Nested loops over n elements commonly lead to:",
+      "options": ["O(1)", "O(log n)", "O(n)", "O(n^2)"],
+      "answerIndex": 3,
+      "explanation": "Two full loops over n often produce n * n operations.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "big-o-4",
+      "question": "Why is Big O still useful even when constants matter?",
+      "options": [
+        "It removes the need for benchmarks",
+        "It compares long-term scaling behavior",
+        "It predicts network latency exactly",
+        "It guarantees fastest real-world code"
+      ],
+      "answerIndex": 1,
+      "explanation": "Big O is best for comparing strategy scalability.",
+      "difficulty": "medium"
+    }
+  ]
+}

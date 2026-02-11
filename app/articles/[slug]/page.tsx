@@ -2,11 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import {
-  categoryToAnchorId,
-  getAllSlugs,
-  getArticleBySlugOrNull,
-} from "@/lib/content";
+import { categoryToSlug } from "@/lib/category";
+import { getAllSlugs, getArticleBySlugOrNull } from "@/lib/content";
+import { getArticleQuizBySlug } from "@/lib/quiz";
 
 export async function generateStaticParams() {
   const slugs = await getAllSlugs();
@@ -19,7 +17,10 @@ type Props = {
 
 export default async function ArticlePage({ params }: Props) {
   const { slug } = await params;
-  const article = await getArticleBySlugOrNull(slug);
+  const [article, articleQuiz] = await Promise.all([
+    getArticleBySlugOrNull(slug),
+    getArticleQuizBySlug(slug),
+  ]);
 
   if (!article) {
     notFound();
@@ -39,7 +40,7 @@ export default async function ArticlePage({ params }: Props) {
             <li>
               <Link
                 className="hover:text-zinc-700"
-                href={`/#${categoryToAnchorId(article.category)}`}
+                href={`/categories/${categoryToSlug(article.category)}`}
               >
                 {article.category}
               </Link>
@@ -73,6 +74,11 @@ export default async function ArticlePage({ params }: Props) {
         <Link className="text-zinc-700 underline" href={`/listen/${slug}`}>
           Listen mode
         </Link>
+        {articleQuiz ? (
+          <Link className="text-zinc-700 underline" href={`/quizzes/articles/${slug}`}>
+            Take quiz
+          </Link>
+        ) : null}
       </div>
     </main>
   );

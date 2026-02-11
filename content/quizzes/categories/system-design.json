@@ -1,0 +1,69 @@
+{
+  "id": "quiz-category-system-design",
+  "title": "System Design Category Quiz",
+  "description": "Core system design terms and interview flow.",
+  "scope": "category",
+  "source": "system-design",
+  "questions": [
+    {
+      "id": "sd-cat-1",
+      "question": "Scalability is mostly about:",
+      "options": [
+        "Handling growth in traffic and users",
+        "Reducing commit size",
+        "Avoiding all caches",
+        "Only adding more CSS files"
+      ],
+      "answerIndex": 0,
+      "explanation": "Scalability addresses sustained performance as demand grows.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "sd-cat-2",
+      "question": "Availability means:",
+      "options": [
+        "The system stays usable despite failures",
+        "The system has zero bugs forever",
+        "The system uses one server only",
+        "The system has no monitoring"
+      ],
+      "answerIndex": 0,
+      "explanation": "Availability is about uptime and service accessibility.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "sd-cat-3",
+      "question": "A typical architecture building block is:",
+      "options": ["Background worker", "Spreadsheet macro", "Browser extension store", "CLI alias"],
+      "answerIndex": 0,
+      "explanation": "Workers process async tasks outside request-response paths.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "sd-cat-4",
+      "question": "A good system design interview starts with:",
+      "options": [
+        "Schema migration details",
+        "Requirement clarification",
+        "Writing benchmark scripts first",
+        "Choosing cloud vendor immediately"
+      ],
+      "answerIndex": 1,
+      "explanation": "Requirements drive all architecture and tradeoff decisions.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "sd-cat-5",
+      "question": "Load balancers are used to:",
+      "options": [
+        "Distribute traffic across servers",
+        "Store backups",
+        "Compile application code",
+        "Encrypt markdown content"
+      ],
+      "answerIndex": 0,
+      "explanation": "They spread incoming requests for better capacity and resilience.",
+      "difficulty": "easy"
+    }
+  ]
+}

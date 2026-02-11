@@ -1,0 +1,83 @@
+{
+  "id": "quiz-category-algorithms",
+  "title": "Algorithms Category Quiz",
+  "description": "Mixed quiz across Big O, searching, traversal, sorting, and hashing.",
+  "scope": "category",
+  "source": "algorithms",
+  "questions": [
+    {
+      "id": "algo-1",
+      "question": "Which complexity is usually best among these for large n?",
+      "options": ["O(n^2)", "O(n log n)", "O(log n)", "O(n)"],
+      "answerIndex": 2,
+      "explanation": "Logarithmic growth is slower than linear and superlinear growth.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "algo-2",
+      "question": "Binary search requires data to be:",
+      "options": ["Sorted", "Randomized", "Unique only", "Encrypted"],
+      "answerIndex": 0,
+      "explanation": "Ordering is required to discard half the range safely.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "algo-3",
+      "question": "For shortest path in unweighted graphs, choose:",
+      "options": ["DFS", "BFS", "Merge sort", "Recursion only"],
+      "answerIndex": 1,
+      "explanation": "BFS discovers nodes by minimum number of edges.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "algo-4",
+      "question": "Merge sort time complexity is:",
+      "options": ["O(log n)", "O(n)", "O(n log n)", "O(n^2)"],
+      "answerIndex": 2,
+      "explanation": "Split levels are logarithmic with linear merge work per level.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "algo-5",
+      "question": "The one-pass Two Sum solution is centered around:",
+      "options": ["Heap operations", "Hash map lookups", "Matrix multiplication", "Backtracking tree"],
+      "answerIndex": 1,
+      "explanation": "It checks complements in a hash map during one array scan.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "algo-6",
+      "question": "A recursion checklist should include:",
+      "options": [
+        "Base case and progress toward it",
+        "No stopping condition",
+        "Random input shuffling",
+        "Global lock management"
+      ],
+      "answerIndex": 0,
+      "explanation": "Termination and progress are mandatory for correct recursion.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "algo-7",
+      "question": "Space complexity of iterative binary search is commonly:",
+      "options": ["O(1)", "O(log n)", "O(n)", "O(n^2)"],
+      "answerIndex": 0,
+      "explanation": "Only a few index variables are needed.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "algo-8",
+      "question": "Which pairing is correct?",
+      "options": [
+        "BFS with stack, DFS with queue",
+        "BFS with queue, DFS with stack/recursion",
+        "Both with heaps",
+        "Both with no data structures"
+      ],
+      "answerIndex": 1,
+      "explanation": "Queue enforces level order; stack/recursion enforces depth order.",
+      "difficulty": "medium"
+    }
+  ]
+}

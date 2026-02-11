@@ -39,6 +39,9 @@ export default function RootLayout({
                 <Link className="hover:text-zinc-900" href="/#categories">
                   Categories
                 </Link>
+                <Link className="hover:text-zinc-900" href="/quizzes">
+                  Quizzes
+                </Link>
               </nav>
             </div>
           </header>
