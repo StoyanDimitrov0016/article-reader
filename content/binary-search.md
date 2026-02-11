@@ -1,5 +1,6 @@
 ---
 title: Binary Search
+category: Algorithms
 tags: [arrays, searching]
 ---
 

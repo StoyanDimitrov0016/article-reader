@@ -1,5 +1,6 @@
 ---
 title: Two Sum
+category: Algorithms
 tags: [arrays, hashing]
 ---
 

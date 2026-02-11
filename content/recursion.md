@@ -1,5 +1,6 @@
 ---
 title: Recursion Patterns
+category: Algorithms
 tags: [recursion]
 ---
 

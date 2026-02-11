@@ -1,5 +1,6 @@
 ---
 title: DFS vs BFS
+category: Algorithms
 tags: [graphs]
 ---
 

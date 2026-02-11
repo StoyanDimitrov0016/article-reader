@@ -3,6 +3,19 @@ import { listArticles } from "@/lib/content";
 
 export default async function Home() {
   const articles = await listArticles();
+  const groupedArticles = articles.reduce<
+    Record<string, Awaited<ReturnType<typeof listArticles>>>
+  >((acc, article) => {
+    if (!acc[article.category]) {
+      acc[article.category] = [];
+    }
+
+    acc[article.category].push(article);
+    return acc;
+  }, {});
+  const categories = Object.entries(groupedArticles).sort(([a], [b]) =>
+    a.localeCompare(b)
+  );
 
   return (
     <div className="min-h-screen bg-zinc-50">
@@ -24,39 +37,46 @@ export default async function Home() {
           {articles.length === 0 ? (
             <p className="text-zinc-500">No articles yet.</p>
           ) : (
-            <ul className="grid gap-4 md:grid-cols-2">
-              {articles.map((article) => (
-                <li
-                  key={article.slug}
-                  className="flex flex-col gap-4 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm"
-                >
-                  <div className="flex flex-col gap-2">
-                    <h2 className="text-xl font-semibold text-zinc-900">
-                      {article.title}
-                    </h2>
-                    {article.tags.length > 0 ? (
-                      <p className="text-xs uppercase tracking-wide text-zinc-500">
-                        {article.tags.join(" | ")}
-                      </p>
-                    ) : null}
-                  </div>
-                  <div className="flex flex-wrap gap-3 text-sm">
-                    <Link
-                      className="rounded-full bg-zinc-900 px-4 py-2 text-white"
-                      href={`/articles/${article.slug}`}
+            categories.map(([category, categoryArticles]) => (
+              <section key={category} className="flex flex-col gap-3">
+                <h2 className="text-lg font-semibold text-zinc-800">
+                  {category}
+                </h2>
+                <ul className="grid gap-4 md:grid-cols-2">
+                  {categoryArticles.map((article) => (
+                    <li
+                      key={article.slug}
+                      className="flex flex-col gap-4 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm"
                     >
-                      Read article
-                    </Link>
-                    <Link
-                      className="rounded-full border border-zinc-300 px-4 py-2 text-zinc-800"
-                      href={`/listen/${article.slug}`}
-                    >
-                      Listen mode
-                    </Link>
-                  </div>
-                </li>
-              ))}
-            </ul>
+                      <div className="flex flex-col gap-2">
+                        <h3 className="text-xl font-semibold text-zinc-900">
+                          {article.title}
+                        </h3>
+                        {article.tags.length > 0 ? (
+                          <p className="text-xs uppercase tracking-wide text-zinc-500">
+                            {article.tags.join(" | ")}
+                          </p>
+                        ) : null}
+                      </div>
+                      <div className="flex flex-wrap gap-3 text-sm">
+                        <Link
+                          className="rounded-full bg-zinc-900 px-4 py-2 text-white"
+                          href={`/articles/${article.slug}`}
+                        >
+                          Read article
+                        </Link>
+                        <Link
+                          className="rounded-full border border-zinc-300 px-4 py-2 text-zinc-800"
+                          href={`/listen/${article.slug}`}
+                        >
+                          Listen mode
+                        </Link>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))
           )}
         </section>
       </main>

@@ -7,11 +7,21 @@ const CONTENT_DIR = path.join(process.cwd(), "content");
 export type Article = {
   slug: string;
   title: string;
+  category: string;
   tags: string[];
   content: string;
 };
 
-export type ArticleMeta = Pick<Article, "slug" | "title" | "tags">;
+export type ArticleMeta = Pick<Article, "slug" | "title" | "category" | "tags">;
+
+function parseCategory(value: unknown): string {
+  if (typeof value !== "string") {
+    return "General";
+  }
+
+  const normalized = value.trim();
+  return normalized.length > 0 ? normalized : "General";
+}
 
 export async function getAllSlugs(): Promise<string[]> {
   const files = await fs.promises.readdir(CONTENT_DIR);
@@ -28,6 +38,7 @@ export async function getArticleBySlug(slug: string): Promise<Article> {
   return {
     slug,
     title: String(data.title ?? slug),
+    category: parseCategory(data.category),
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     content,
   };
@@ -57,10 +68,14 @@ export async function listArticles(): Promise<ArticleMeta[]> {
       return {
         slug,
         title: String(data.title ?? slug),
+        category: parseCategory(data.category),
         tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
       };
     })
   );
 
-  return metas.sort((a, b) => a.title.localeCompare(b.title));
+  return metas.sort(
+    (a, b) =>
+      a.category.localeCompare(b.category) || a.title.localeCompare(b.title)
+  );
 }

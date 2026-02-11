@@ -1,5 +1,6 @@
 ---
 title: Merge Sort
+category: Algorithms
 tags: [sorting, divide-and-conquer]
 ---
 

@@ -26,7 +26,7 @@ export default async function ListenPage({ params }: Props) {
       <header className="flex flex-col gap-4">
         <div className="flex flex-wrap items-center gap-3 text-sm text-zinc-500">
           <span className="rounded-full bg-zinc-100 px-3 py-1 uppercase tracking-wide">
-            Listen mode
+            {article.category} | Listen mode
           </span>
           <Link className="underline" href={`/articles/${slug}`}>
             Back to article

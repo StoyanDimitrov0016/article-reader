@@ -24,7 +24,9 @@ export default async function ArticlePage({ params }: Props) {
   return (
     <main className="mx-auto flex min-h-screen max-w-3xl flex-col gap-6 px-6 py-12">
       <header className="flex flex-col gap-3">
-        <p className="text-sm uppercase tracking-wide text-zinc-500">Article</p>
+        <p className="text-sm uppercase tracking-wide text-zinc-500">
+          {article.category} | Article
+        </p>
         <h1 className="text-3xl font-semibold leading-tight text-zinc-900">
           {article.title}
         </h1>

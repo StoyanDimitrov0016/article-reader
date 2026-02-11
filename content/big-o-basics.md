@@ -1,5 +1,6 @@
 ---
 title: Big O Basics
+category: Algorithms
 tags: [complexity]
 ---
 
