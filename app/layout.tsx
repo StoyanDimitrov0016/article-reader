@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -26,28 +28,30 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <div className="min-h-screen bg-zinc-50 text-zinc-900">
-          <header className="border-b border-zinc-200 bg-white/90 backdrop-blur">
+        <div className="min-h-screen bg-background text-foreground">
+          <header className="bg-card/90 backdrop-blur">
             <div className="mx-auto flex w-full max-w-4xl items-center justify-between px-6 py-4">
               <Link href="/" className="text-lg font-semibold tracking-tight">
                 Article Reader
               </Link>
-              <nav className="flex items-center gap-4 text-sm text-zinc-600">
-                <Link className="hover:text-zinc-900" href="/">
-                  Home
-                </Link>
-                <Link className="hover:text-zinc-900" href="/#categories">
-                  Categories
-                </Link>
-                <Link className="hover:text-zinc-900" href="/quizzes">
-                  Quizzes
-                </Link>
+              <nav className="flex items-center gap-2 text-sm">
+                <Button asChild variant="ghost" size="sm">
+                  <Link href="/">Home</Link>
+                </Button>
+                <Button asChild variant="ghost" size="sm">
+                  <Link href="/#categories">Categories</Link>
+                </Button>
+                <Button asChild variant="ghost" size="sm">
+                  <Link href="/quizzes">Quizzes</Link>
+                </Button>
               </nav>
             </div>
+            <Separator />
           </header>
           {children}
-          <footer className="border-t border-zinc-200 bg-white">
-            <div className="mx-auto flex w-full max-w-4xl items-center justify-between px-6 py-4 text-xs text-zinc-500">
+          <footer className="bg-card">
+            <Separator />
+            <div className="mx-auto flex w-full max-w-4xl items-center justify-between px-6 py-4 text-xs text-muted-foreground">
               <p>Built for fast reading and listen mode.</p>
               <p>POC</p>
             </div>

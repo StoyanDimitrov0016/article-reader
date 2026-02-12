@@ -3,6 +3,11 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { categoryToSlug } from "@/lib/category";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 type ArticleCardData = {
   slug: string;
@@ -73,121 +78,94 @@ export function ArticleCatalog({ articles, quizArticleSlugs }: Props) {
 
   return (
     <>
-      <section className="flex flex-col gap-3">
+      <section className="flex flex-col gap-4">
         <label
           htmlFor="article-search"
-          className="text-xs font-semibold uppercase tracking-wide text-zinc-500"
+          className="text-xs font-semibold uppercase tracking-wide text-muted-foreground"
         >
           Search
         </label>
-        <input
+        <Input
           id="article-search"
           type="search"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Search by title, tag, category, or summary"
-          className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm text-zinc-800 outline-none ring-zinc-200 transition focus:border-zinc-400 focus:ring-4"
         />
-        <p className="text-xs text-zinc-500">
+        <p className="text-xs text-muted-foreground">
           {filteredArticles.length} result{filteredArticles.length === 1 ? "" : "s"}
           {normalizedQuery ? ` for "${query}"` : ""}
         </p>
-        <div className="flex flex-wrap gap-2">
-          <button
-            type="button"
-            onClick={() => setLessonFilter("core")}
-            className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${
-              lessonFilter === "core"
-                ? "border-zinc-900 bg-zinc-900 text-white"
-                : "border-zinc-300 bg-white text-zinc-700 hover:border-zinc-400"
-            }`}
-          >
-            Core
-          </button>
-          <button
-            type="button"
-            onClick={() => setLessonFilter("deep")}
-            className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${
-              lessonFilter === "deep"
-                ? "border-zinc-900 bg-zinc-900 text-white"
-                : "border-zinc-300 bg-white text-zinc-700 hover:border-zinc-400"
-            }`}
-          >
-            Deep
-          </button>
-        </div>
+        <Tabs
+          value={lessonFilter}
+          onValueChange={(value) =>
+            setLessonFilter(value === "deep" ? "deep" : "core")
+          }
+          className="w-fit"
+        >
+          <TabsList>
+            <TabsTrigger value="core">Core</TabsTrigger>
+            <TabsTrigger value="deep">Deep</TabsTrigger>
+          </TabsList>
+        </Tabs>
       </section>
 
       <section id="categories" className="flex flex-wrap gap-2">
         {allCategories.map((category) => (
-          <Link
-            key={category}
-            href={`/categories/${categoryToSlug(category)}`}
-            className="rounded-full border border-zinc-300 bg-white px-3 py-1.5 text-xs font-medium text-zinc-700 hover:border-zinc-400 hover:text-zinc-900"
-          >
-            {category}
-          </Link>
+          <Button key={category} asChild variant="outline" size="sm">
+            <Link href={`/categories/${categoryToSlug(category)}`}>{category}</Link>
+          </Button>
         ))}
       </section>
 
       <section className="flex flex-col gap-6">
         {groupedCategories.length === 0 ? (
-          <div className="rounded-2xl border border-zinc-200 bg-white p-6 text-sm text-zinc-600">
+          <div className="rounded-2xl border bg-card p-6 text-sm text-muted-foreground">
             No articles match your search.
           </div>
         ) : (
           groupedCategories.map(([category, categoryArticles]) => (
             <section key={category} className="flex flex-col gap-3">
-              <h2 className="text-lg font-semibold text-zinc-800">{category}</h2>
+              <h2 className="text-lg font-semibold text-foreground">{category}</h2>
               <ul className="grid gap-4 md:grid-cols-2">
                 {categoryArticles.map((article) => (
-                  <li
-                    key={article.slug}
-                    className="flex flex-col gap-4 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm"
-                  >
-                    <div className="flex flex-col gap-2">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <h3 className="text-xl font-semibold text-zinc-900">
-                          {article.title}
-                        </h3>
-                        <span className="rounded-full border border-zinc-200 bg-zinc-50 px-2.5 py-1 text-xs text-zinc-600">
-                          {article.lessonType === "core" ? "Core lesson" : "Deep dive"}
-                        </span>
-                        <span className="rounded-full bg-zinc-100 px-2.5 py-1 text-xs text-zinc-600">
-                          {article.readMinutes} min read
-                        </span>
-                      </div>
-                      {article.summary ? (
-                        <p className="text-sm text-zinc-600">{article.summary}</p>
-                      ) : null}
-                      {article.tags.length > 0 ? (
-                        <p className="text-xs uppercase tracking-wide text-zinc-500">
-                          {article.tags.join(" | ")}
-                        </p>
-                      ) : null}
-                    </div>
-                    <div className="flex flex-wrap gap-3 text-sm">
-                      <Link
-                        className="rounded-full bg-zinc-900 px-4 py-2 text-white"
-                        href={`/articles/${article.slug}`}
-                      >
-                        Read article
-                      </Link>
-                      <Link
-                        className="rounded-full border border-zinc-300 px-4 py-2 text-zinc-800"
-                        href={`/listen/${article.slug}`}
-                      >
-                        Listen mode
-                      </Link>
-                      {quizSlugSet.has(article.slug) ? (
-                        <Link
-                          className="rounded-full border border-zinc-300 px-4 py-2 text-zinc-800"
-                          href={`/quizzes/articles/${article.slug}`}
-                        >
-                          Quiz
-                        </Link>
-                      ) : null}
-                    </div>
+                  <li key={article.slug}>
+                    <Card className="gap-4 py-0">
+                      <CardContent className="flex flex-col gap-4 p-6">
+                        <div className="flex flex-col gap-2">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <h3 className="text-xl font-semibold text-foreground">
+                              {article.title}
+                            </h3>
+                            <Badge variant="outline">
+                              {article.lessonType === "core" ? "Core lesson" : "Deep dive"}
+                            </Badge>
+                            <Badge variant="secondary">{article.readMinutes} min read</Badge>
+                          </div>
+                          {article.summary ? (
+                            <p className="text-sm text-muted-foreground">{article.summary}</p>
+                          ) : null}
+                          {article.tags.length > 0 ? (
+                            <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                              {article.tags.join(" | ")}
+                            </p>
+                          ) : null}
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          <Button asChild size="sm">
+                            <Link href={`/articles/${article.slug}`}>Read article</Link>
+                          </Button>
+                          <Button asChild variant="outline" size="sm">
+                            <Link href={`/listen/${article.slug}`}>Listen mode</Link>
+                          </Button>
+                          {quizSlugSet.has(article.slug) ? (
+                            <Button asChild variant="secondary" size="sm">
+                              <Link href={`/quizzes/articles/${article.slug}`}>Quiz</Link>
+                            </Button>
+                          ) : null}
+                        </div>
+                      </CardContent>
+                    </Card>
                   </li>
                 ))}
               </ul>

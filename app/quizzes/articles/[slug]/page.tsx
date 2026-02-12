@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { QuizPlayer } from "@/components/quiz-player";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { getArticleQuizBySlug, listArticleQuizSlugs } from "@/lib/quiz";
 
 export async function generateStaticParams() {
@@ -23,16 +25,16 @@ export default async function ArticleQuizPage({ params }: Props) {
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-4xl flex-col gap-8 px-6 py-10">
       <header className="flex flex-col gap-4">
-        <nav aria-label="Breadcrumb" className="text-sm text-zinc-500">
+        <nav aria-label="Breadcrumb" className="text-sm text-muted-foreground">
           <ol className="flex flex-wrap items-center gap-2">
             <li>
-              <Link className="hover:text-zinc-700" href="/">
+              <Link className="hover:text-foreground" href="/">
                 Home
               </Link>
             </li>
             <li>/</li>
             <li>
-              <Link className="hover:text-zinc-700" href="/quizzes">
+              <Link className="hover:text-foreground" href="/quizzes">
                 Quizzes
               </Link>
             </li>
@@ -40,28 +42,28 @@ export default async function ArticleQuizPage({ params }: Props) {
             <li>Article quiz</li>
           </ol>
         </nav>
-        <h1 className="text-3xl font-semibold text-zinc-900">{quiz.title}</h1>
-        <p className="text-sm text-zinc-600">
+        <h1 className="text-3xl font-semibold text-foreground">{quiz.title}</h1>
+        <p className="text-sm text-muted-foreground">
           {quiz.description ?? "Test your understanding of this article."}
         </p>
-        <p className="text-xs uppercase tracking-wide text-zinc-500">
+        <Badge variant="outline" className="w-fit uppercase tracking-wide">
           {quiz.questions.length} question
           {quiz.questions.length === 1 ? "" : "s"}
-        </p>
+        </Badge>
       </header>
 
       <QuizPlayer questions={quiz.questions} />
 
-      <div className="flex flex-wrap gap-4 text-sm">
-        <Link className="text-zinc-700 underline" href={`/articles/${slug}`}>
-          Back to article
-        </Link>
-        <Link className="text-zinc-700 underline" href={`/listen/${slug}`}>
-          Listen mode
-        </Link>
-        <Link className="text-zinc-700 underline" href="/quizzes">
-          More quizzes
-        </Link>
+      <div className="flex flex-wrap gap-2">
+        <Button asChild variant="ghost" size="sm">
+          <Link href={`/articles/${slug}`}>Back to article</Link>
+        </Button>
+        <Button asChild variant="outline" size="sm">
+          <Link href={`/listen/${slug}`}>Listen mode</Link>
+        </Button>
+        <Button asChild variant="secondary" size="sm">
+          <Link href="/quizzes">More quizzes</Link>
+        </Button>
       </div>
     </main>
   );
