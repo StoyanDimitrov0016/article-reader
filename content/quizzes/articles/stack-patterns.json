@@ -1,0 +1,68 @@
+{
+  "id": "quiz-stack-patterns",
+  "title": "Stack Patterns Quiz",
+  "description": "Test LIFO reasoning and monotonic stack usage.",
+  "scope": "article",
+  "source": "stack-patterns",
+  "questions": [
+    {
+      "id": "st-1",
+      "question": "Stack processing order is:",
+      "options": ["FIFO", "LIFO", "Random", "Sorted by key"],
+      "answerIndex": 1,
+      "explanation": "Last pushed item is the first popped item.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "st-2",
+      "question": "Balanced parentheses checking primarily needs:",
+      "options": ["Queue", "Heap", "Stack", "Binary search tree"],
+      "answerIndex": 2,
+      "explanation": "Most recent opening symbol must be matched first.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "st-3",
+      "question": "In many next-greater problems, stack stores:",
+      "options": ["Only counts", "Indices", "Sorted values only", "Depth levels"],
+      "answerIndex": 1,
+      "explanation": "Indices allow both value comparison and boundary calculations.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "st-4",
+      "question": "Monotonic stack loops remain O(n) because:",
+      "options": [
+        "Each element is pushed and popped at most once",
+        "All values are unique",
+        "Sorting happens first",
+        "Recursion is faster"
+      ],
+      "answerIndex": 0,
+      "explanation": "Total push/pop operations are linear across the pass.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "st-5",
+      "question": "A frequent correctness check before pop is:",
+      "options": [
+        "stack length is not zero",
+        "array is sorted",
+        "key exists in map",
+        "queue has one node"
+      ],
+      "answerIndex": 0,
+      "explanation": "Popping from empty stack causes invalid matching logic.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "st-6",
+      "question": "If you need first-in first-out behavior, stack is usually:",
+      "options": ["Best fit", "Equivalent to queue", "Not the best fit", "Required by BFS"],
+      "answerIndex": 2,
+      "explanation": "FIFO behavior is naturally modeled by queues, not stacks.",
+      "difficulty": "easy"
+    }
+  ]
+}
+

@@ -1,0 +1,83 @@
+{
+  "id": "quiz-array-fundamentals",
+  "title": "Array Fundamentals Quiz",
+  "description": "Test index access, range reasoning, and array tradeoffs.",
+  "scope": "article",
+  "source": "array-fundamentals",
+  "questions": [
+    {
+      "id": "arr-1",
+      "question": "Which array operation is typically O(1)?",
+      "options": [
+        "Read value by index",
+        "Insert in the middle",
+        "Delete at the beginning",
+        "Shift all elements right"
+      ],
+      "answerIndex": 0,
+      "explanation": "Direct index access computes the location without scanning.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "arr-2",
+      "question": "Why is middle insertion usually O(n) in arrays?",
+      "options": [
+        "It requires sorting first",
+        "Existing elements may need to shift positions",
+        "Index math is logarithmic",
+        "Arrays do not support insertion"
+      ],
+      "answerIndex": 1,
+      "explanation": "Elements after the insertion point are shifted to keep contiguity.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "arr-3",
+      "question": "Prefix sums are most useful for:",
+      "options": [
+        "Single random update",
+        "Repeated range-sum queries on mostly immutable data",
+        "Sorting by frequency",
+        "Cycle detection"
+      ],
+      "answerIndex": 1,
+      "explanation": "After one precompute pass, each range sum is answered in O(1).",
+      "difficulty": "medium"
+    },
+    {
+      "id": "arr-4",
+      "question": "For inclusive indices [l, r], range sum from prefix array is:",
+      "options": [
+        "pref[r] - pref[l]",
+        "pref[r + 1] - pref[l]",
+        "pref[r] - pref[l + 1]",
+        "pref[r + 1] + pref[l]"
+      ],
+      "answerIndex": 1,
+      "explanation": "Prefix usually stores sum up to but excluding index i.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "arr-5",
+      "question": "Which is the best first structure for heavy random index reads?",
+      "options": ["Array", "Singly linked list", "Queue", "Stack"],
+      "answerIndex": 0,
+      "explanation": "Arrays provide direct O(1) index access.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "arr-6",
+      "question": "A common array bug source is:",
+      "options": [
+        "Using too many hash maps",
+        "Off-by-one boundary mistakes",
+        "Not having enough recursion",
+        "Missing heap comparators"
+      ],
+      "answerIndex": 1,
+      "explanation": "Index bounds and inclusive/exclusive confusion often break correctness.",
+      "difficulty": "easy"
+    }
+  ]
+}
+

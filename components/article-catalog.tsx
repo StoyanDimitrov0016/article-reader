@@ -10,6 +10,8 @@ type ArticleCardData = {
   category: string;
   tags: string[];
   summary?: string;
+  readMinutes: number;
+  lessonType: "core" | "deep";
 };
 
 type Props = {
@@ -32,16 +34,22 @@ function matchesQuery(article: ArticleCardData, query: string): boolean {
 
 export function ArticleCatalog({ articles, quizArticleSlugs }: Props) {
   const [query, setQuery] = useState("");
+  const [lessonFilter, setLessonFilter] = useState<"core" | "deep">("core");
   const normalizedQuery = query.trim().toLowerCase();
   const quizSlugSet = useMemo(() => new Set(quizArticleSlugs), [quizArticleSlugs]);
 
+  const scopedArticles = useMemo(
+    () => articles.filter((article) => article.lessonType === lessonFilter),
+    [articles, lessonFilter]
+  );
+
   const filteredArticles = useMemo(() => {
     if (!normalizedQuery) {
-      return articles;
+      return scopedArticles;
     }
 
-    return articles.filter((article) => matchesQuery(article, normalizedQuery));
-  }, [articles, normalizedQuery]);
+    return scopedArticles.filter((article) => matchesQuery(article, normalizedQuery));
+  }, [normalizedQuery, scopedArticles]);
 
   const groupedCategories = useMemo(() => {
     const grouped = new Map<string, ArticleCardData[]>();
@@ -59,8 +67,8 @@ export function ArticleCatalog({ articles, quizArticleSlugs }: Props) {
   }, [filteredArticles]);
 
   const allCategories = useMemo(
-    () => Array.from(new Set(articles.map((article) => article.category))).sort(),
-    [articles]
+    () => Array.from(new Set(scopedArticles.map((article) => article.category))).sort(),
+    [scopedArticles]
   );
 
   return (
@@ -84,6 +92,30 @@ export function ArticleCatalog({ articles, quizArticleSlugs }: Props) {
           {filteredArticles.length} result{filteredArticles.length === 1 ? "" : "s"}
           {normalizedQuery ? ` for "${query}"` : ""}
         </p>
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => setLessonFilter("core")}
+            className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${
+              lessonFilter === "core"
+                ? "border-zinc-900 bg-zinc-900 text-white"
+                : "border-zinc-300 bg-white text-zinc-700 hover:border-zinc-400"
+            }`}
+          >
+            Core
+          </button>
+          <button
+            type="button"
+            onClick={() => setLessonFilter("deep")}
+            className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${
+              lessonFilter === "deep"
+                ? "border-zinc-900 bg-zinc-900 text-white"
+                : "border-zinc-300 bg-white text-zinc-700 hover:border-zinc-400"
+            }`}
+          >
+            Deep
+          </button>
+        </div>
       </section>
 
       <section id="categories" className="flex flex-wrap gap-2">
@@ -114,9 +146,17 @@ export function ArticleCatalog({ articles, quizArticleSlugs }: Props) {
                     className="flex flex-col gap-4 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm"
                   >
                     <div className="flex flex-col gap-2">
-                      <h3 className="text-xl font-semibold text-zinc-900">
-                        {article.title}
-                      </h3>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <h3 className="text-xl font-semibold text-zinc-900">
+                          {article.title}
+                        </h3>
+                        <span className="rounded-full border border-zinc-200 bg-zinc-50 px-2.5 py-1 text-xs text-zinc-600">
+                          {article.lessonType === "core" ? "Core lesson" : "Deep dive"}
+                        </span>
+                        <span className="rounded-full bg-zinc-100 px-2.5 py-1 text-xs text-zinc-600">
+                          {article.readMinutes} min read
+                        </span>
+                      </div>
                       {article.summary ? (
                         <p className="text-sm text-zinc-600">{article.summary}</p>
                       ) : null}

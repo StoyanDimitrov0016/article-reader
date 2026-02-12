@@ -1,0 +1,73 @@
+{
+  "id": "quiz-binary-tree-patterns",
+  "title": "Binary Tree Patterns Quiz",
+  "description": "Test traversal choice, recursion contracts, and tree complexity.",
+  "scope": "article",
+  "source": "binary-tree-patterns",
+  "questions": [
+    {
+      "id": "bt-1",
+      "question": "In recursive tree problems, the most critical first step is:",
+      "options": [
+        "Choose queue size",
+        "Define what dfs(node) returns",
+        "Sort node values",
+        "Flatten tree immediately"
+      ],
+      "answerIndex": 1,
+      "explanation": "A clear return contract keeps combination logic correct.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "bt-2",
+      "question": "Level-order traversal is naturally implemented with:",
+      "options": ["Stack", "Deque used as stack", "Queue", "Hash set only"],
+      "answerIndex": 2,
+      "explanation": "FIFO queue expands nodes depth by depth.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "bt-3",
+      "question": "For max depth recurrence, which relation is correct?",
+      "options": [
+        "depth(node) = depth(left) + depth(right)",
+        "depth(node) = 1 + max(depth(left), depth(right))",
+        "depth(node) = min(depth(left), depth(right))",
+        "depth(node) = node.value"
+      ],
+      "answerIndex": 1,
+      "explanation": "Depth is one plus deeper subtree depth.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "bt-4",
+      "question": "If root is null, many DFS tree functions should return:",
+      "options": ["1", "Infinity", "A base value such as 0 or false", "Always throw"],
+      "answerIndex": 2,
+      "explanation": "Null base case anchors recursion and prevents crashes.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "bt-5",
+      "question": "DFS recursion extra space is usually:",
+      "options": ["O(1)", "O(log n) always", "O(h) where h is tree height", "O(n^2)"],
+      "answerIndex": 2,
+      "explanation": "Call stack depth follows tree height in DFS recursion.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "bt-6",
+      "question": "A common tree bug is:",
+      "options": [
+        "Using arrays for output",
+        "Mixing local return value with global aggregate intent",
+        "Checking null first",
+        "Using BFS for levels"
+      ],
+      "answerIndex": 1,
+      "explanation": "Confusing the recursion contract with global tracking breaks logic.",
+      "difficulty": "hard"
+    }
+  ]
+}
+

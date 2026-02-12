@@ -1,0 +1,78 @@
+{
+  "id": "quiz-hash-map-and-set-patterns",
+  "title": "Hash Map and Set Quiz",
+  "description": "Test key design, frequency counting, and lookup patterns.",
+  "scope": "article",
+  "source": "hash-map-and-set-patterns",
+  "questions": [
+    {
+      "id": "hm-1",
+      "question": "What is usually the most important decision in a hash-map solution?",
+      "options": [
+        "Loop direction only",
+        "Which key and value to store",
+        "Whether to use recursion",
+        "Whether the array is sorted"
+      ],
+      "answerIndex": 1,
+      "explanation": "Key/value design determines whether operations answer the needed query efficiently.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "hm-2",
+      "question": "A hash set is most directly used for:",
+      "options": [
+        "Frequency counting with exact totals",
+        "Fast membership and dedup checks",
+        "Ordered iteration by key",
+        "Range sum queries"
+      ],
+      "answerIndex": 1,
+      "explanation": "Sets track existence, making membership checks efficient.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "hm-3",
+      "question": "Complement lookup (like Two Sum) typically improves complexity from:",
+      "options": ["O(n) to O(log n)", "O(n^2) to O(n)", "O(log n) to O(1)", "O(n) to O(n^2)"],
+      "answerIndex": 1,
+      "explanation": "One pass plus average O(1) lookup avoids nested scans.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hm-4",
+      "question": "If order of appearance matters after counting, a common pattern is:",
+      "options": [
+        "Single pass only",
+        "Build frequency then do a second pass over original data",
+        "Sort hash buckets directly",
+        "Switch to linked list immediately"
+      ],
+      "answerIndex": 1,
+      "explanation": "Second pass preserves original order while using precomputed counts.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hm-5",
+      "question": "Which statement about hash map performance is accurate?",
+      "options": [
+        "Lookups are always O(1) worst-case guaranteed",
+        "Lookups are O(1) average with possible worse collisions",
+        "Lookups are always O(log n)",
+        "Lookups require sorted keys"
+      ],
+      "answerIndex": 1,
+      "explanation": "Average behavior is constant-time, but worst-case can degrade.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "hm-6",
+      "question": "For counting characters in a string, best starting value in map is typically:",
+      "options": ["null", "1 for all keys in advance", "current + 1 from default 0", "length of string"],
+      "answerIndex": 2,
+      "explanation": "Incrementing from default 0 is the standard frequency map pattern.",
+      "difficulty": "easy"
+    }
+  ]
+}
+

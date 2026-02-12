@@ -77,9 +77,14 @@ export default async function CategoryPage({ params }: Props) {
               className="flex flex-col gap-4 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm"
             >
               <div className="flex flex-col gap-2">
-                <h2 className="text-xl font-semibold text-zinc-900">
-                  {article.title}
-                </h2>
+                <div className="flex flex-wrap items-center gap-2">
+                  <h2 className="text-xl font-semibold text-zinc-900">
+                    {article.title}
+                  </h2>
+                  <span className="rounded-full bg-zinc-100 px-2.5 py-1 text-xs text-zinc-600">
+                    {article.readMinutes} min read
+                  </span>
+                </div>
                 {article.summary ? (
                   <p className="text-sm text-zinc-600">{article.summary}</p>
                 ) : null}

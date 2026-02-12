@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { categoryToSlug } from "@/lib/category";
-import { getAllSlugs, getArticleBySlugOrNull } from "@/lib/content";
+import { getAllSlugs, getArticleBySlugOrNull, getLessonRelations } from "@/lib/content";
 import { getArticleQuizBySlug } from "@/lib/quiz";
 
 export async function generateStaticParams() {
@@ -17,9 +17,10 @@ type Props = {
 
 export default async function ArticlePage({ params }: Props) {
   const { slug } = await params;
-  const [article, articleQuiz] = await Promise.all([
+  const [article, articleQuiz, relations] = await Promise.all([
     getArticleBySlugOrNull(slug),
     getArticleQuizBySlug(slug),
+    getLessonRelations(slug),
   ]);
 
   if (!article) {
@@ -49,9 +50,14 @@ export default async function ArticlePage({ params }: Props) {
             <li>Article</li>
           </ol>
         </nav>
-        <h1 className="text-3xl font-semibold leading-tight text-zinc-900">
-          {article.title}
-        </h1>
+        <div className="flex flex-wrap items-center gap-2">
+          <h1 className="text-3xl font-semibold leading-tight text-zinc-900">
+            {article.title}
+          </h1>
+          <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs text-zinc-600">
+            {article.readMinutes} min read
+          </span>
+        </div>
         {article.tags.length > 0 ? (
           <ul className="flex flex-wrap gap-2 text-xs text-zinc-600">
             {article.tags.map((tag) => (
@@ -61,6 +67,50 @@ export default async function ArticlePage({ params }: Props) {
             ))}
           </ul>
         ) : null}
+        <section className="rounded-2xl border border-zinc-200 bg-zinc-50 p-4 text-sm text-zinc-700">
+          <p className="font-semibold text-zinc-800">Lesson Path</p>
+          {relations.lessonType === "core" ? (
+            relations.deepDives.length > 0 ? (
+              <div className="mt-2 flex flex-col gap-1">
+                <p>This is the core lesson. Continue with deep dives:</p>
+                {relations.deepDives.map((deepDive) => (
+                  <Link
+                    key={deepDive.slug}
+                    className="underline"
+                    href={`/articles/${deepDive.slug}`}
+                  >
+                    {deepDive.title}
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <p className="mt-2">This is the core lesson. No deep dives yet.</p>
+            )
+          ) : (
+            <div className="mt-2 flex flex-col gap-1">
+              <p>This is a deep dive.</p>
+              {relations.coreArticle ? (
+                <Link className="underline" href={`/articles/${relations.coreArticle.slug}`}>
+                  Core lesson: {relations.coreArticle.title}
+                </Link>
+              ) : null}
+              {relations.deepDives.filter((deepDive) => deepDive.slug !== slug).length > 0 ? (
+                <p className="pt-1">Other deep dives:</p>
+              ) : null}
+              {relations.deepDives
+                .filter((deepDive) => deepDive.slug !== slug)
+                .map((deepDive) => (
+                  <Link
+                    key={deepDive.slug}
+                    className="underline"
+                    href={`/articles/${deepDive.slug}`}
+                  >
+                    {deepDive.title}
+                  </Link>
+                ))}
+            </div>
+          )}
+        </section>
       </header>
       <article className="article-content">
         <ReactMarkdown remarkPlugins={[remarkGfm]}>

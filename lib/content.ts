@@ -4,6 +4,10 @@ import matter from "gray-matter";
 import { categoryToSlug } from "./category";
 
 const CONTENT_DIR = path.join(process.cwd(), "content");
+const DEFAULT_READING_WPM = 165;
+const DEEP_SLUG_MARKER = "--deep-";
+
+export type LessonType = "core" | "deep";
 
 type ArticleFrontmatter = {
   title: string;
@@ -11,6 +15,7 @@ type ArticleFrontmatter = {
   tags: string[];
   summary?: string;
   order?: number;
+  readMinutes?: number;
 };
 
 export type Article = {
@@ -20,12 +25,23 @@ export type Article = {
   tags: string[];
   summary?: string;
   order?: number;
+  readMinutes: number;
+  lessonType: LessonType;
+  coreSlug: string;
   content: string;
 };
 
 export type ArticleMeta = Pick<
   Article,
-  "slug" | "title" | "category" | "tags" | "summary" | "order"
+  | "slug"
+  | "title"
+  | "category"
+  | "tags"
+  | "summary"
+  | "order"
+  | "readMinutes"
+  | "lessonType"
+  | "coreSlug"
 >;
 
 function parseFrontmatter(
@@ -91,13 +107,46 @@ function parseFrontmatter(
     order = data.order;
   }
 
+  let readMinutes: number | undefined;
+  if (data.readMinutes !== undefined) {
+    if (
+      typeof data.readMinutes !== "number" ||
+      !Number.isFinite(data.readMinutes) ||
+      data.readMinutes <= 0
+    ) {
+      throw new Error(
+        `[content] Invalid "readMinutes" in ${filePath}. Expected a positive number.`
+      );
+    }
+
+    readMinutes = data.readMinutes;
+  }
+
   return {
     title: data.title.trim() || slug,
     category,
     tags,
     summary,
     order,
+    readMinutes,
   };
+}
+
+function estimateReadMinutes(content: string, wpm = DEFAULT_READING_WPM): number {
+  const wordCount = content.trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(wordCount / wpm));
+}
+
+function getLessonTypeFromSlug(slug: string): LessonType {
+  return slug.includes(DEEP_SLUG_MARKER) ? "deep" : "core";
+}
+
+function getCoreSlugFromSlug(slug: string): string {
+  if (!slug.includes(DEEP_SLUG_MARKER)) {
+    return slug;
+  }
+
+  return slug.split(DEEP_SLUG_MARKER)[0] ?? slug;
 }
 
 function byCategoryThenOrderThenTitle(a: ArticleMeta, b: ArticleMeta): number {
@@ -130,6 +179,8 @@ export async function getAllSlugs(): Promise<string[]> {
 
 export async function getArticleBySlug(slug: string): Promise<Article> {
   const { frontmatter, content } = await readArticleFile(slug);
+  const lessonType = getLessonTypeFromSlug(slug);
+  const coreSlug = getCoreSlugFromSlug(slug);
 
   return {
     slug,
@@ -138,6 +189,9 @@ export async function getArticleBySlug(slug: string): Promise<Article> {
     tags: frontmatter.tags,
     summary: frontmatter.summary,
     order: frontmatter.order,
+    readMinutes: frontmatter.readMinutes ?? estimateReadMinutes(content),
+    lessonType,
+    coreSlug,
     content,
   };
 }
@@ -160,7 +214,7 @@ export async function listArticles(): Promise<ArticleMeta[]> {
   const slugs = await getAllSlugs();
   const metas = await Promise.all(
     slugs.map(async (slug) => {
-      const { frontmatter } = await readArticleFile(slug);
+      const { frontmatter, content } = await readArticleFile(slug);
       return {
         slug,
         title: frontmatter.title,
@@ -168,6 +222,9 @@ export async function listArticles(): Promise<ArticleMeta[]> {
         tags: frontmatter.tags,
         summary: frontmatter.summary,
         order: frontmatter.order,
+        readMinutes: frontmatter.readMinutes ?? estimateReadMinutes(content),
+        lessonType: getLessonTypeFromSlug(slug),
+        coreSlug: getCoreSlugFromSlug(slug),
       };
     })
   );
@@ -192,4 +249,30 @@ export async function listArticlesByCategory(
 ): Promise<ArticleMeta[]> {
   const articles = await listArticles();
   return articles.filter((article) => article.category === category);
+}
+
+export async function getLessonRelations(slug: string): Promise<{
+  lessonType: LessonType;
+  coreSlug: string;
+  coreArticle: ArticleMeta | null;
+  deepDives: ArticleMeta[];
+}> {
+  const lessonType = getLessonTypeFromSlug(slug);
+  const coreSlug = getCoreSlugFromSlug(slug);
+  const articles = await listArticles();
+
+  const coreArticle =
+    articles.find(
+      (article) => article.slug === coreSlug && article.lessonType === "core"
+    ) ?? null;
+  const deepDives = articles.filter(
+    (article) => article.coreSlug === coreSlug && article.lessonType === "deep"
+  );
+
+  return {
+    lessonType,
+    coreSlug,
+    coreArticle,
+    deepDives,
+  };
 }
