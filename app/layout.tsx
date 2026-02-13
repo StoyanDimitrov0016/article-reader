@@ -30,11 +30,11 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <div className="min-h-screen bg-background text-foreground">
           <header className="bg-card/90 backdrop-blur">
-            <div className="mx-auto flex w-full max-w-4xl items-center justify-between px-6 py-4">
+            <div className="flex w-full flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
               <Link href="/" className="text-lg font-semibold tracking-tight">
                 Article Reader
               </Link>
-              <nav className="flex items-center gap-2 text-sm">
+              <nav className="flex flex-wrap items-center gap-1.5 text-sm">
                 <Button asChild variant="ghost" size="sm">
                   <Link href="/">Home</Link>
                 </Button>
@@ -51,7 +51,7 @@ export default function RootLayout({
           {children}
           <footer className="bg-card">
             <Separator />
-            <div className="mx-auto flex w-full max-w-4xl items-center justify-between px-6 py-4 text-xs text-muted-foreground">
+            <div className="flex w-full flex-wrap items-center justify-between gap-2 px-4 py-4 text-xs text-muted-foreground sm:px-6 lg:px-8">
               <p>Built for fast reading and listen mode.</p>
               <p>POC</p>
             </div>
