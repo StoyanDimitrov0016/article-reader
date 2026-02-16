@@ -1,0 +1,52 @@
+{
+  "id": "quiz-dfs-vs-bfs",
+  "title": "DFS vs BFS Quiz",
+  "description": "Compare traversal strategies and when to use each.",
+  "scope": "lesson",
+  "source": "dfs-vs-bfs",
+  "questions": [
+    {
+      "id": "dfs-bfs-1",
+      "question": "BFS explores nodes in which order?",
+      "options": ["Depth first", "Level by level", "Randomly", "By edge weight only"],
+      "answerIndex": 1,
+      "explanation": "BFS processes neighbors by distance layers.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "dfs-bfs-2",
+      "question": "DFS is usually preferred for:",
+      "options": [
+        "Shortest path in unweighted graph",
+        "Topological ordering and cycle checks",
+        "Level-order traversal output",
+        "Guaranteed minimal memory usage"
+      ],
+      "answerIndex": 1,
+      "explanation": "DFS is commonly used for topology/cycle/connectivity checks.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "dfs-bfs-3",
+      "question": "For shortest path in an unweighted graph, choose:",
+      "options": ["DFS", "BFS", "Either always equal", "Dijkstra only"],
+      "answerIndex": 1,
+      "explanation": "BFS reaches nodes in increasing edge-distance order.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "dfs-bfs-4",
+      "question": "A common implementation pair is:",
+      "options": [
+        "BFS with stack, DFS with queue",
+        "BFS with queue, DFS with stack or recursion",
+        "Both with hash maps only",
+        "Both with heaps only"
+      ],
+      "answerIndex": 1,
+      "explanation": "Queue gives breadth ordering; stack/recursion gives depth ordering.",
+      "difficulty": "medium"
+    }
+  ]
+}
+

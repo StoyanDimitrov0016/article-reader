@@ -1,0 +1,29 @@
+{
+  "slug": "linked-list-fundamentals",
+  "title": "Linked List Fundamentals",
+  "category": "Data Structures",
+  "tags": [
+    "linked-list",
+    "pointers",
+    "fast-slow",
+    "in-place"
+  ],
+  "summary": "Pointer-based sequence structure focused on local rewiring and traversal contracts.",
+  "order": 30,
+  "readMinutes": 9,
+  "deepDives": [
+    {
+      "slug": "pointer-safety",
+      "title": "Linked List Fundamentals Deep Dive: Pointer Safety",
+      "tags": [
+        "linked-list",
+        "pointers",
+        "mutation",
+        "deep-dive"
+      ],
+      "summary": "Reliable pointer rewiring patterns, mutation ordering, and cycle-related pitfalls.",
+      "order": 30.5,
+      "readMinutes": 8
+    }
+  ]
+}

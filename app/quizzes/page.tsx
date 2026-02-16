@@ -1,14 +1,14 @@
 import Link from "next/link";
+import { ListingCard } from "@/components/listing-card";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import {
-  listArticleQuizSummaries,
   listCategoryQuizSummaries,
+  listLessonQuizSummaries,
 } from "@/lib/quiz";
 
 export default async function QuizIndexPage() {
-  const [articleQuizzes, categoryQuizzes] = await Promise.all([
-    listArticleQuizSummaries(),
+  const [lessonQuizzes, categoryQuizzes] = await Promise.all([
+    listLessonQuizSummaries(),
     listCategoryQuizSummaries(),
   ]);
 
@@ -17,7 +17,7 @@ export default async function QuizIndexPage() {
       <header className="flex flex-col gap-3">
         <h1 className="text-3xl font-semibold text-foreground">Quizzes</h1>
         <p className="max-w-2xl text-sm text-muted-foreground">
-          Try predefined quizzes by article or by category. Results are session
+          Try predefined quizzes by lesson or by category. Results are session
           only for now.
         </p>
       </header>
@@ -29,24 +29,22 @@ export default async function QuizIndexPage() {
         ) : (
           <ul className="grid gap-4 md:grid-cols-2">
             {categoryQuizzes.map((quiz) => (
-              <li key={quiz.slug}>
-                <Card className="gap-4 py-0">
-                  <CardHeader>
-                    <CardTitle>{quiz.title}</CardTitle>
-                    {quiz.description ? (
-                      <CardDescription>{quiz.description}</CardDescription>
-                    ) : null}
-                  </CardHeader>
-                  <CardContent className="space-y-3">
+              <li key={quiz.slug} className="h-full">
+                <ListingCard
+                  title={quiz.title}
+                  description={quiz.description}
+                  details={
                     <p className="text-xs text-muted-foreground">
                       {quiz.questionCount} question
                       {quiz.questionCount === 1 ? "" : "s"}
                     </p>
-                    <Button asChild size="sm">
+                  }
+                  actions={
+                    <Button asChild size="sm" className="h-7 px-2.5 text-xs">
                       <Link href={`/quizzes/categories/${quiz.slug}`}>Start category quiz</Link>
                     </Button>
-                  </CardContent>
-                </Card>
+                  }
+                />
               </li>
             ))}
           </ul>
@@ -54,30 +52,28 @@ export default async function QuizIndexPage() {
       </section>
 
       <section className="flex flex-col gap-4">
-        <h2 className="text-xl font-semibold text-foreground">Article Quizzes</h2>
-        {articleQuizzes.length === 0 ? (
-          <p className="text-sm text-muted-foreground">No article quizzes yet.</p>
+        <h2 className="text-xl font-semibold text-foreground">Lesson Quizzes</h2>
+        {lessonQuizzes.length === 0 ? (
+          <p className="text-sm text-muted-foreground">No lesson quizzes yet.</p>
         ) : (
           <ul className="grid gap-4 md:grid-cols-2">
-            {articleQuizzes.map((quiz) => (
-              <li key={quiz.slug}>
-                <Card className="gap-4 py-0">
-                  <CardHeader>
-                    <CardTitle>{quiz.title}</CardTitle>
-                    {quiz.description ? (
-                      <CardDescription>{quiz.description}</CardDescription>
-                    ) : null}
-                  </CardHeader>
-                  <CardContent className="space-y-3">
+            {lessonQuizzes.map((quiz) => (
+              <li key={quiz.slug} className="h-full">
+                <ListingCard
+                  title={quiz.title}
+                  description={quiz.description}
+                  details={
                     <p className="text-xs text-muted-foreground">
                       {quiz.questionCount} question
                       {quiz.questionCount === 1 ? "" : "s"}
                     </p>
-                    <Button asChild size="sm">
-                      <Link href={`/quizzes/articles/${quiz.slug}`}>Start article quiz</Link>
+                  }
+                  actions={
+                    <Button asChild size="sm" className="h-7 px-2.5 text-xs">
+                      <Link href={`/quizzes/lessons/${quiz.slug}`}>Start lesson quiz</Link>
                     </Button>
-                  </CardContent>
-                </Card>
+                  }
+                />
               </li>
             ))}
           </ul>

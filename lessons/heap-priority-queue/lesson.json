@@ -1,0 +1,30 @@
+{
+  "slug": "heap-priority-queue",
+  "title": "Heap and Priority Queue",
+  "category": "Data Structures",
+  "tags": [
+    "heap",
+    "priority-queue",
+    "top-k",
+    "scheduling"
+  ],
+  "summary": "A structure for repeated highest-priority retrieval with efficient updates.",
+  "order": 60,
+  "readMinutes": 8,
+  "deepDives": [
+    {
+      "slug": "top-k-and-comparators",
+      "title": "Heap and Priority Queue Deep Dive: Top-K and Comparator Design",
+      "tags": [
+        "heap",
+        "priority-queue",
+        "top-k",
+        "comparator",
+        "deep-dive"
+      ],
+      "summary": "Subtle design choices that make heap solutions correct and efficient in real workloads.",
+      "order": 60.5,
+      "readMinutes": 8
+    }
+  ]
+}

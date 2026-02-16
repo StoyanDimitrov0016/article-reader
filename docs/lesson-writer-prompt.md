@@ -31,33 +31,45 @@ Deep dives should contain advanced details that are valuable but optional on fir
 
 ### Duration targets
 
-1. Core lesson: at most 10 minutes.
-2. Each deep dive: usually 4 to 8 minutes.
+1. Core lesson: usually 10 to 15 minutes, with a hard ceiling of 15 minutes.
+2. Each deep dive: usually 5 to 10 minutes.
 3. Keep pacing medium and avoid dense bursts of new terminology.
 
 ### File layout
 
-Create files in `content/` using this naming style:
+Create files in `lessons/` using this structure:
 
-- Core: `{topic-slug}.md`
-- Deep dives: `{topic-slug}--deep-{short-name}.md`
+- Core lesson:
+  - `lessons/{topic-slug}/lesson.json`
+  - `lessons/{topic-slug}/core.md`
+  - `lessons/{topic-slug}/quiz.json`
+- Deep dives:
+  - `lessons/{topic-slug}/deep/{deep-slug}/lesson.md`
+  - `lessons/{topic-slug}/deep/{deep-slug}/quiz.json` (optional)
 
-Examples:
+### Metadata requirements
 
-- `content/hash-map-and-set-patterns.md`
-- `content/hash-map-and-set-patterns--deep-collisions.md`
-- `content/hash-map-and-set-patterns--deep-memory-layout.md`
+Put all metadata in `lesson.json`. Do not use markdown frontmatter.
 
-### Frontmatter requirements
+`lesson.json` must include:
 
-Use frontmatter compatible with this project:
-
+- `slug`
 - `title`
 - `category`
 - `tags`
 - `summary`
 - `order`
 - `readMinutes` (integer, required)
+- `deepDives` (array, can be empty)
+
+Each `deepDives` item must include:
+
+- `slug`
+- `title`
+- `tags`
+- `summary`
+- `order`
+- `readMinutes`
 
 Set `readMinutes` as a practical estimate for 1x listening/reading pace.
 
@@ -135,7 +147,7 @@ Before final output, check:
 3. Did each covered term include both a simple real-world intuition example and a real implementation/use-case example?
 4. Did we separate core vs advanced details cleanly?
 5. Is the text technically correct and language-agnostic by default?
-6. Is the core lesson capped to 10 minutes?
+6. Is the core lesson capped to 15 minutes?
 7. After each introduced term, are both required examples present immediately?
 8. Are section openings resilient to interruption (quick context reminder)?
 

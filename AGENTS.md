@@ -1,7 +1,7 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
-This repository is a Next.js App Router project. Core route files live in `app/` (`page.tsx`, `layout.tsx`, and dynamic routes like `app/articles/[slug]/page.tsx`). Reusable UI is split between feature components in `components/` and ShadCN primitives in `components/ui/`. Shared logic lives in `lib/` (content loading, quiz parsing, category helpers). Article source files are in `content/*.md`, and quiz payloads are in `content/quizzes/**`. Static assets are in `public/`, and product/reference docs are in `docs/`.
+This repository is a Next.js App Router project. Core route files live in `app/` (`page.tsx`, `layout.tsx`, and dynamic routes like `app/lessons/[slug]/page.tsx`). Reusable UI is split between feature components in `components/` and ShadCN primitives in `components/ui/`. Shared logic lives in `lib/` (lesson loading, quiz parsing, category helpers). Lesson source files are in `lessons/<lesson-slug>/` with a `lesson.json` metadata file, `core.md`, and optional deep lessons under `deep/<deep-slug>/lesson.md`. Quiz payloads are stored alongside lessons (`quiz.json`) plus category quizzes in `lessons/_category-quizzes/`. Static assets are in `public/`, and product/reference docs are in `docs/`.
 
 ## Build, Test, and Development Commands
 - `npm install`: install dependencies.
@@ -19,7 +19,7 @@ Use TypeScript with strict typing (`tsconfig.json` has `"strict": true`). Follow
 Automated unit/integration tests are not yet configured. Minimum validation for each change:
 - Run `npm run lint`.
 - Run `npm run build`.
-- Manually smoke-test affected flows (catalog, article page, listen page, quiz page).
+- Manually smoke-test affected flows (catalog, lesson page, category page, quiz page).
 
 If you add tests, use `*.test.ts` / `*.test.tsx` naming and keep them near the feature they validate.
 
@@ -31,4 +31,4 @@ Recent history favors conventional-style commits (`feat:`, `chore:`, `style:`, `
 - Manual verification steps executed locally.
 
 ## Content Authoring Notes
-Article markdown files should use stable slugs (`content/<slug>.md`), with deep dives following the `--deep-` pattern. Frontmatter supports `title` (required), plus optional `category`, `tags`, `summary`, `order`, and `readMinutes`. Quiz JSON file names should match article slugs under `content/quizzes/articles/`.
+Each lesson pack should use a stable slug folder (`lessons/<slug>/`). Core content goes in `core.md`, deep dives go in `deep/<deep-slug>/lesson.md`, and metadata is defined in `lesson.json` (`slug`, `title`, `category`, `tags`, `summary`, `order`, `readMinutes`, `deepDives`). Lesson quizzes live at `lessons/<slug>/quiz.json`, and category quizzes live under `lessons/_category-quizzes/`.

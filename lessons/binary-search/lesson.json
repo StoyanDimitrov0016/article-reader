@@ -1,0 +1,28 @@
+{
+  "slug": "binary-search",
+  "title": "Binary Search",
+  "category": "Algorithms",
+  "tags": [
+    "searching",
+    "sorted-data",
+    "invariants"
+  ],
+  "summary": "A boundary-finding method that cuts search space in half each step.",
+  "order": 25,
+  "readMinutes": 8,
+  "deepDives": [
+    {
+      "slug": "invariants-and-boundaries",
+      "title": "Binary Search Deep Dive: Invariants and Boundaries",
+      "tags": [
+        "binary-search",
+        "invariants",
+        "boundaries",
+        "deep-dive"
+      ],
+      "summary": "Why binary search succeeds or fails based on interval contracts and monotonic predicates.",
+      "order": 25.1,
+      "readMinutes": 8
+    }
+  ]
+}

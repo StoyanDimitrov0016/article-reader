@@ -1,0 +1,84 @@
+{
+  "id": "quiz-linked-list-fundamentals",
+  "title": "Linked List Fundamentals Quiz",
+  "description": "Test pointer safety, dummy nodes, and fast-slow patterns.",
+  "scope": "lesson",
+  "source": "linked-list-fundamentals",
+  "questions": [
+    {
+      "id": "ll-1",
+      "question": "What is the main array advantage over linked lists?",
+      "options": [
+        "O(1) random index access",
+        "Guaranteed O(1) middle insertion",
+        "No null checks needed",
+        "Always lower memory"
+      ],
+      "answerIndex": 0,
+      "explanation": "Arrays support direct positional access without pointer traversal.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "ll-2",
+      "question": "Dummy nodes are mainly used to:",
+      "options": [
+        "Speed up recursion",
+        "Avoid head-edge special cases",
+        "Sort lists automatically",
+        "Remove need for loops"
+      ],
+      "answerIndex": 1,
+      "explanation": "A dummy predecessor simplifies insertion and deletion around head.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "ll-3",
+      "question": "In fast-slow pointers, cycle detection works because:",
+      "options": [
+        "Fast pointer eventually laps slow pointer inside the cycle",
+        "Slow pointer moves backward",
+        "Both pointers always stay equal",
+        "Pointers are sorted first"
+      ],
+      "answerIndex": 0,
+      "explanation": "Different speeds ensure a meeting point if a cycle exists.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "ll-4",
+      "question": "A common pointer bug in list rewiring is:",
+      "options": [
+        "Using a Set",
+        "Losing the rest of the list before saving next reference",
+        "Using while loops",
+        "Returning dummy instead of dummy.next always"
+      ],
+      "answerIndex": 1,
+      "explanation": "If next is not preserved when needed, remaining nodes become unreachable.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "ll-5",
+      "question": "Given a node reference, local insertion/deletion in linked list is usually:",
+      "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+      "answerIndex": 0,
+      "explanation": "Pointer rewiring near known node is constant-time.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "ll-6",
+      "question": "Which guard prevents null-pointer crashes while traversing two steps?",
+      "options": [
+        "if (fast || fast.next)",
+        "while (fast && fast.next)",
+        "while (fast.next.next)",
+        "if (!slow)"
+      ],
+      "answerIndex": 1,
+      "explanation": "Both fast and fast.next must exist before accessing fast.next.next.",
+      "difficulty": "easy"
+    }
+  ]
+}
+
+

@@ -1,0 +1,29 @@
+{
+  "slug": "hash-map-and-set-patterns",
+  "title": "Hash Map and Set Patterns",
+  "category": "Data Structures",
+  "tags": [
+    "hash-map",
+    "hash-set",
+    "lookup",
+    "counting"
+  ],
+  "summary": "Fast key-based lookup patterns for counting, deduplication, and one-pass matching.",
+  "order": 20,
+  "readMinutes": 9,
+  "deepDives": [
+    {
+      "slug": "hashing-and-collisions",
+      "title": "Hash Map and Set Deep Dive: Hashing and Collisions",
+      "tags": [
+        "hash-map",
+        "hash-set",
+        "collisions",
+        "deep-dive"
+      ],
+      "summary": "How hashing, collision handling, and resize behavior affect correctness and performance.",
+      "order": 20.5,
+      "readMinutes": 9
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "slug": "sliding-window-pattern",
+  "title": "Sliding Window Pattern",
+  "category": "Algorithms",
+  "tags": [
+    "sliding-window",
+    "two-pointers",
+    "strings",
+    "arrays"
+  ],
+  "summary": "A linear-time pattern for contiguous range problems using invariant-driven window updates.",
+  "order": 35,
+  "readMinutes": 8,
+  "deepDives": [
+    {
+      "slug": "invariant-design",
+      "title": "Sliding Window Deep Dive: Invariant Design",
+      "tags": [
+        "sliding-window",
+        "invariants",
+        "two-pointers",
+        "deep-dive"
+      ],
+      "summary": "Designing validity invariants that make window updates correct and linear.",
+      "order": 35.5,
+      "readMinutes": 8
+    }
+  ]
+}

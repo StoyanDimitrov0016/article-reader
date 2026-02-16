@@ -1,0 +1,28 @@
+{
+  "slug": "merge-sort",
+  "title": "Merge Sort",
+  "category": "Algorithms",
+  "tags": [
+    "sorting",
+    "divide-and-conquer",
+    "stability"
+  ],
+  "summary": "A stable divide-and-conquer sorting algorithm with predictable O(n log n) time.",
+  "order": 45,
+  "readMinutes": 7,
+  "deepDives": [
+    {
+      "slug": "stability-and-memory",
+      "title": "Merge Sort Deep Dive: Stability and Memory Behavior",
+      "tags": [
+        "merge-sort",
+        "divide-and-conquer",
+        "stability",
+        "deep-dive"
+      ],
+      "summary": "Why merge sort is stable, where memory overhead comes from, and when it is preferred.",
+      "order": 45.1,
+      "readMinutes": 7
+    }
+  ]
+}

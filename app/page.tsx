@@ -1,16 +1,16 @@
-import { ArticleCatalog } from "@/components/article-catalog";
-import { listArticles } from "@/lib/content";
-import { listArticleQuizSlugs } from "@/lib/quiz";
+import { LessonCatalog } from "@/components/lesson-catalog";
+import { listLessons } from "@/lib/content";
+import { listLessonQuizSlugs } from "@/lib/quiz";
 
 export default async function Home() {
-  const [articles, articleQuizSlugs] = await Promise.all([
-    listArticles(),
-    listArticleQuizSlugs(),
+  const [lessons, lessonQuizSlugs] = await Promise.all([
+    listLessons(),
+    listLessonQuizSlugs(),
   ]);
 
   return (
     <main className="flex w-full flex-col px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
-      <ArticleCatalog articles={articles} quizArticleSlugs={articleQuizSlugs} />
+      <LessonCatalog lessons={lessons} quizLessonSlugs={lessonQuizSlugs} />
     </main>
   );
 }

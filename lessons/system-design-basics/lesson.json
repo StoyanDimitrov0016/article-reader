@@ -1,0 +1,29 @@
+{
+  "slug": "system-design-basics",
+  "title": "System Design Basics",
+  "category": "System Design",
+  "tags": [
+    "scalability",
+    "availability",
+    "reliability",
+    "architecture"
+  ],
+  "summary": "A practical framework for translating product requirements into architecture tradeoffs.",
+  "order": 80,
+  "readMinutes": 10,
+  "deepDives": [
+    {
+      "slug": "scale-tradeoffs",
+      "title": "System Design Basics Deep Dive: Scale Tradeoffs",
+      "tags": [
+        "system-design",
+        "scalability",
+        "consistency",
+        "deep-dive"
+      ],
+      "summary": "How latency, availability, consistency, and operability trade off in real architecture choices.",
+      "order": 80.1,
+      "readMinutes": 9
+    }
+  ]
+}

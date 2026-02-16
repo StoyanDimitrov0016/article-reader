@@ -1,0 +1,30 @@
+{
+  "slug": "queue-and-deque-patterns",
+  "title": "Queue and Deque Patterns",
+  "category": "Data Structures",
+  "tags": [
+    "queue",
+    "deque",
+    "bfs",
+    "window-processing"
+  ],
+  "summary": "FIFO and double-ended processing patterns for level order and sliding windows.",
+  "order": 50,
+  "readMinutes": 8,
+  "deepDives": [
+    {
+      "slug": "monotonic-deque",
+      "title": "Queue and Deque Deep Dive: Monotonic Window Processing",
+      "tags": [
+        "queue",
+        "deque",
+        "sliding-window",
+        "monotonic",
+        "deep-dive"
+      ],
+      "summary": "How monotonic deques achieve linear-time window max/min with strong invariants.",
+      "order": 50.5,
+      "readMinutes": 8
+    }
+  ]
+}

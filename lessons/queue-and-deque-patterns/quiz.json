@@ -1,0 +1,69 @@
+{
+  "id": "quiz-queue-and-deque-patterns",
+  "title": "Queue and Deque Quiz",
+  "description": "Test FIFO reasoning, BFS ordering, and sliding-window deque logic.",
+  "scope": "lesson",
+  "source": "queue-and-deque-patterns",
+  "questions": [
+    {
+      "id": "qd-1",
+      "question": "Queue semantics are:",
+      "options": ["LIFO", "FIFO", "Sorted insertion", "Hash-based"],
+      "answerIndex": 1,
+      "explanation": "First element inserted is removed first.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "qd-2",
+      "question": "BFS shortest-path guarantee in unweighted graphs depends on:",
+      "options": [
+        "Monotonic stack order",
+        "FIFO level expansion",
+        "Heap comparator",
+        "Binary tree property"
+      ],
+      "answerIndex": 1,
+      "explanation": "Queue order explores nodes by increasing edge distance.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "qd-3",
+      "question": "In sliding window maximum, deque should store:",
+      "options": ["Raw values only", "Indices", "Frequencies", "Visited flags"],
+      "answerIndex": 1,
+      "explanation": "Indices let you remove elements that leave the window.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "qd-4",
+      "question": "Before reading current window max from deque, you should:",
+      "options": [
+        "Sort the deque",
+        "Drop indices that are out of window",
+        "Reverse the array",
+        "Reset the queue"
+      ],
+      "answerIndex": 1,
+      "explanation": "Expired indices at the front must be removed first.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "qd-5",
+      "question": "Monotonic deque window-max complexity is usually:",
+      "options": ["O(1)", "O(log n)", "O(n)", "O(n^2)"],
+      "answerIndex": 2,
+      "explanation": "Each index is appended and removed at most once.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "qd-6",
+      "question": "If processing must prioritize newest task first, queue is usually:",
+      "options": ["Ideal by default", "Equivalent to stack", "Not the best first choice", "Required by DFS"],
+      "answerIndex": 2,
+      "explanation": "Newest-first behavior is LIFO, which maps to stacks.",
+      "difficulty": "easy"
+    }
+  ]
+}
+
+

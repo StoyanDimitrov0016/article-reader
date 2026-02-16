@@ -1,0 +1,29 @@
+{
+  "slug": "array-fundamentals",
+  "title": "Array Fundamentals",
+  "category": "Data Structures",
+  "tags": [
+    "arrays",
+    "memory-layout",
+    "indexing",
+    "amortization"
+  ],
+  "summary": "The foundational sequence structure, with practical intuition for memory layout, indexing, and resize behavior.",
+  "order": 10,
+  "readMinutes": 11,
+  "deepDives": [
+    {
+      "slug": "memory-and-amortization",
+      "title": "Array Fundamentals Deep Dive: Memory and Amortization",
+      "tags": [
+        "arrays",
+        "memory-layout",
+        "amortization",
+        "deep-dive"
+      ],
+      "summary": "What actually happens in memory when arrays grow, move, and compute offsets.",
+      "order": 10.5,
+      "readMinutes": 9
+    }
+  ]
+}

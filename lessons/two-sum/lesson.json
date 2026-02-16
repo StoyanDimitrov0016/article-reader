@@ -1,0 +1,28 @@
+{
+  "slug": "two-sum",
+  "title": "Two Sum",
+  "category": "Algorithms",
+  "tags": [
+    "arrays",
+    "hashing",
+    "complements"
+  ],
+  "summary": "A foundational complement-lookup pattern that converts nested search into linear scan.",
+  "order": 22,
+  "readMinutes": 7,
+  "deepDives": [
+    {
+      "slug": "variants-and-failure-cases",
+      "title": "Two Sum Deep Dive: Variants and Failure Cases",
+      "tags": [
+        "two-sum",
+        "hashing",
+        "pointers",
+        "deep-dive"
+      ],
+      "summary": "Extending Two Sum reasoning to sorted, streaming, and duplicate-sensitive variants.",
+      "order": 22.1,
+      "readMinutes": 7
+    }
+  ]
+}

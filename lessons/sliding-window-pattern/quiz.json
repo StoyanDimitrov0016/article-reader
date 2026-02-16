@@ -1,0 +1,92 @@
+{
+  "id": "quiz-sliding-window-pattern",
+  "title": "Sliding Window Quiz",
+  "description": "Practice trigger recognition, invariants, and pointer movement.",
+  "scope": "lesson",
+  "source": "sliding-window-pattern",
+  "questions": [
+    {
+      "id": "sw-1",
+      "question": "Sliding window is most likely useful when the problem focuses on:",
+      "options": [
+        "Contiguous subarrays or substrings",
+        "Arbitrary subsets of items",
+        "Root-to-leaf tree paths only",
+        "Disconnected graph components"
+      ],
+      "answerIndex": 0,
+      "explanation": "The pattern is built for contiguous ranges where a moving window can be maintained.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "sw-2",
+      "question": "In a variable-size window, when should the left pointer move?",
+      "options": [
+        "Only at the end of the loop",
+        "Whenever the current window violates the invariant",
+        "Every second iteration",
+        "Only when right reaches the last index"
+      ],
+      "answerIndex": 1,
+      "explanation": "You shrink from the left until the validity condition is restored.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "sw-3",
+      "question": "What is the standard formula for current window length?",
+      "options": ["right - left", "right + left + 1", "right - left + 1", "left - right + 1"],
+      "answerIndex": 2,
+      "explanation": "Both bounds are inclusive, so length is right minus left plus one.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "sw-4",
+      "question": "Which mistake commonly breaks correctness?",
+      "options": [
+        "Using a while loop while shrinking",
+        "Updating the answer after restoring validity",
+        "Moving left only once even though the window is still invalid",
+        "Storing frequency counts in a map"
+      ],
+      "answerIndex": 2,
+      "explanation": "Some inputs need multiple removals before the invariant becomes valid again.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "sw-5",
+      "question": "Fixed-size window problems usually require:",
+      "options": [
+        "Window size grows every step",
+        "Window size stays at k after warm-up",
+        "No removals from the left side",
+        "Sorting at each iteration"
+      ],
+      "answerIndex": 1,
+      "explanation": "After the first k elements, each new add is paired with one removal.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "sw-6",
+      "question": "Typical time complexity for a correct sliding window implementation is:",
+      "options": ["O(1)", "O(log n)", "O(n)", "O(n^2)"],
+      "answerIndex": 2,
+      "explanation": "Each pointer moves forward at most n times, so total pointer movement is linear.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "sw-7",
+      "question": "Which condition makes sliding window a weak fit?",
+      "options": [
+        "The validity depends on a state you can update incrementally",
+        "The answer uses contiguous ranges",
+        "The validity requires global recomputation after each step",
+        "The input is an array or string"
+      ],
+      "answerIndex": 2,
+      "explanation": "Without incremental state updates, the pattern loses its O(n) advantage.",
+      "difficulty": "hard"
+    }
+  ]
+}
+
+

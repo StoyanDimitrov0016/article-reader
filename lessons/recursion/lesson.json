@@ -1,0 +1,28 @@
+{
+  "slug": "recursion",
+  "title": "Recursion Patterns",
+  "category": "Algorithms",
+  "tags": [
+    "recursion",
+    "divide-and-conquer",
+    "memoization"
+  ],
+  "summary": "A practical framework for defining recursive contracts and avoiding common stack pitfalls.",
+  "order": 40,
+  "readMinutes": 8,
+  "deepDives": [
+    {
+      "slug": "call-stack-and-memoization",
+      "title": "Recursion Deep Dive: Call Stack and Memoization",
+      "tags": [
+        "recursion",
+        "call-stack",
+        "memoization",
+        "deep-dive"
+      ],
+      "summary": "What recursive calls allocate, why stack limits matter, and when memoization changes complexity.",
+      "order": 40.1,
+      "readMinutes": 8
+    }
+  ]
+}

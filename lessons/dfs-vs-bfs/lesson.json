@@ -1,0 +1,29 @@
+{
+  "slug": "dfs-vs-bfs",
+  "title": "DFS vs BFS",
+  "category": "Algorithms",
+  "tags": [
+    "graphs",
+    "traversal",
+    "search"
+  ],
+  "summary": "How traversal frontier strategy changes guarantees, memory profile, and best-use scenarios.",
+  "order": 55,
+  "readMinutes": 8,
+  "deepDives": [
+    {
+      "slug": "frontier-management",
+      "title": "DFS vs BFS Deep Dive: Frontier Management",
+      "tags": [
+        "dfs",
+        "bfs",
+        "graphs",
+        "frontier",
+        "deep-dive"
+      ],
+      "summary": "Choosing traversal based on frontier shape, memory profile, and correctness guarantees.",
+      "order": 55.1,
+      "readMinutes": 7
+    }
+  ]
+}

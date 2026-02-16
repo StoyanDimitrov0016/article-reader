@@ -1,0 +1,29 @@
+{
+  "slug": "stack-patterns",
+  "title": "Stack Patterns",
+  "category": "Data Structures",
+  "tags": [
+    "stack",
+    "lifo",
+    "monotonic-stack",
+    "parsing"
+  ],
+  "summary": "Last-in-first-out reasoning for structural matching and boundary discovery.",
+  "order": 40,
+  "readMinutes": 8,
+  "deepDives": [
+    {
+      "slug": "monotonic-and-parser-patterns",
+      "title": "Stack Patterns Deep Dive: Monotonic and Parser Workflows",
+      "tags": [
+        "stack",
+        "monotonic-stack",
+        "parsing",
+        "deep-dive"
+      ],
+      "summary": "Deeper stack patterns for structural validation and next-greater boundary problems.",
+      "order": 40.5,
+      "readMinutes": 8
+    }
+  ]
+}

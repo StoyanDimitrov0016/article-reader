@@ -1,0 +1,27 @@
+{
+  "slug": "big-o-basics",
+  "title": "Big O Basics",
+  "category": "Algorithms",
+  "tags": [
+    "complexity",
+    "performance",
+    "asymptotics"
+  ],
+  "summary": "A practical model for reasoning about how algorithm cost grows with input size.",
+  "order": 5,
+  "readMinutes": 8,
+  "deepDives": [
+    {
+      "slug": "complexity-in-practice",
+      "title": "Big O Basics Deep Dive: Complexity in Practice",
+      "tags": [
+        "complexity",
+        "asymptotics",
+        "deep-dive"
+      ],
+      "summary": "How asymptotic notation maps to real runtime behavior and engineering decisions.",
+      "order": 5.1,
+      "readMinutes": 8
+    }
+  ]
+}

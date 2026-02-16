@@ -1,11 +1,15 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const QUIZ_ROOT = path.join(process.cwd(), "content", "quizzes");
-const ARTICLE_QUIZ_DIR = path.join(QUIZ_ROOT, "articles");
-const CATEGORY_QUIZ_DIR = path.join(QUIZ_ROOT, "categories");
+const LESSONS_DIR = path.join(process.cwd(), "lessons");
+const CATEGORY_QUIZ_DIR = path.join(LESSONS_DIR, "_category-quizzes");
+const CORE_QUIZ_FILE = "quiz.json";
+const DEEP_DIR_NAME = "deep";
+const DEEP_QUIZ_FILE = "quiz.json";
+const DEEP_SLUG_MARKER = "--deep-";
+const RESERVED_LESSONS_DIR = "_category-quizzes";
 
-type QuizScope = "article" | "category";
+type QuizScope = "lesson" | "category";
 type QuizDifficulty = "easy" | "medium" | "hard";
 
 export type QuizQuestion = {
@@ -135,12 +139,12 @@ function parseQuestion(
 }
 
 function parseScope(value: unknown, filePath: string): QuizScope {
-  if (value === "article" || value === "category") {
+  if (value === "lesson" || value === "category") {
     return value;
   }
 
   throw new Error(
-    `[quiz] Invalid "scope" in ${filePath}. Expected "article" or "category".`
+    `[quiz] Invalid "scope" in ${filePath}. Expected "lesson" or "category".`
   );
 }
 
@@ -199,32 +203,76 @@ async function listQuizSummaries(
   slugs: string[],
   loader: (slug: string) => Promise<Quiz | null>
 ): Promise<QuizSummary[]> {
-  const quizzes = await Promise.all(slugs.map((slug) => loader(slug)));
-  return quizzes
-    .filter((quiz): quiz is Quiz => quiz !== null)
-    .map((quiz) => ({
-      slug: quiz.source,
-      title: quiz.title,
-      description: quiz.description,
-      questionCount: quiz.questions.length,
+  const entries = await Promise.all(
+    slugs.map(async (slug) => ({
+      slug,
+      quiz: await loader(slug),
+    }))
+  );
+
+  return entries
+    .filter((entry): entry is { slug: string; quiz: Quiz } => entry.quiz !== null)
+    .map((entry) => ({
+      slug: entry.slug,
+      title: entry.quiz.title,
+      description: entry.quiz.description,
+      questionCount: entry.quiz.questions.length,
     }))
     .sort((a, b) => a.title.localeCompare(b.title));
 }
 
-export async function listArticleQuizSlugs(): Promise<string[]> {
-  return listQuizSlugs(ARTICLE_QUIZ_DIR);
+export async function listLessonQuizSlugs(): Promise<string[]> {
+  const entries = await fs.promises.readdir(LESSONS_DIR, { withFileTypes: true });
+  const lessonSlugs = entries
+    .filter(
+      (entry) => entry.isDirectory() && entry.name !== RESERVED_LESSONS_DIR
+    )
+    .map((entry) => entry.name)
+    .sort((a, b) => a.localeCompare(b));
+
+  const slugs: string[] = [];
+  for (const lessonSlug of lessonSlugs) {
+    const coreQuizPath = path.join(LESSONS_DIR, lessonSlug, CORE_QUIZ_FILE);
+    if (fs.existsSync(coreQuizPath)) {
+      slugs.push(lessonSlug);
+    }
+
+    const deepDir = path.join(LESSONS_DIR, lessonSlug, DEEP_DIR_NAME);
+    try {
+      const deepEntries = await fs.promises.readdir(deepDir, { withFileTypes: true });
+      for (const deepEntry of deepEntries) {
+        if (!deepEntry.isDirectory()) {
+          continue;
+        }
+
+        const deepQuizPath = path.join(deepDir, deepEntry.name, DEEP_QUIZ_FILE);
+        if (fs.existsSync(deepQuizPath)) {
+          slugs.push(`${lessonSlug}${DEEP_SLUG_MARKER}${deepEntry.name}`);
+        }
+      }
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
+        throw error;
+      }
+    }
+  }
+
+  return slugs.sort((a, b) => a.localeCompare(b));
 }
 
 export async function listCategoryQuizSlugs(): Promise<string[]> {
   return listQuizSlugs(CATEGORY_QUIZ_DIR);
 }
 
-export async function getArticleQuizBySlug(slug: string): Promise<Quiz | null> {
-  const filePath = path.join(ARTICLE_QUIZ_DIR, `${slug}.json`);
+export async function getLessonQuizBySlug(slug: string): Promise<Quiz | null> {
+  const [coreSlug, deepSlug] = slug.split(DEEP_SLUG_MARKER);
+  const filePath = deepSlug
+    ? path.join(LESSONS_DIR, coreSlug, DEEP_DIR_NAME, deepSlug, DEEP_QUIZ_FILE)
+    : path.join(LESSONS_DIR, slug, CORE_QUIZ_FILE);
 
   try {
     const quiz = await readQuizFile(filePath);
-    return quiz.scope === "article" ? quiz : null;
+    return quiz.scope === "lesson" ? quiz : null;
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === "ENOENT") {
       return null;
@@ -249,9 +297,9 @@ export async function getCategoryQuizBySlug(slug: string): Promise<Quiz | null> 
   }
 }
 
-export async function listArticleQuizSummaries(): Promise<QuizSummary[]> {
-  const slugs = await listArticleQuizSlugs();
-  return listQuizSummaries(slugs, getArticleQuizBySlug);
+export async function listLessonQuizSummaries(): Promise<QuizSummary[]> {
+  const slugs = await listLessonQuizSlugs();
+  return listQuizSummaries(slugs, getLessonQuizBySlug);
 }
 
 export async function listCategoryQuizSummaries(): Promise<QuizSummary[]> {

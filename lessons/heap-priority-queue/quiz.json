@@ -1,0 +1,79 @@
+{
+  "id": "quiz-heap-priority-queue",
+  "title": "Heap and Priority Queue Quiz",
+  "description": "Test heap invariants, top-k strategy, and complexity choices.",
+  "scope": "lesson",
+  "source": "heap-priority-queue",
+  "questions": [
+    {
+      "id": "hp-1",
+      "question": "Which statement about heaps is correct?",
+      "options": [
+        "Heap array is fully sorted",
+        "Only root has guaranteed extreme priority",
+        "All leaves are sorted",
+        "Heap supports O(1) arbitrary deletion"
+      ],
+      "answerIndex": 1,
+      "explanation": "Heap guarantees parent-child order, not full ordering.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "hp-2",
+      "question": "For top-k largest values, a common strategy is:",
+      "options": [
+        "Use min-heap of size k",
+        "Use queue of size k",
+        "Use stack of size k",
+        "Use linked list only"
+      ],
+      "answerIndex": 0,
+      "explanation": "Min-heap root tracks smallest among current top-k candidates.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hp-3",
+      "question": "Why is top-k via heap often O(n log k)?",
+      "options": [
+        "All n items are sorted fully",
+        "Each of n items may trigger O(log k) heap adjustment",
+        "Lookups are O(1)",
+        "No rebalancing is needed"
+      ],
+      "answerIndex": 1,
+      "explanation": "Bounded heap operations scale with k rather than n.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hp-4",
+      "question": "Heap top peek complexity is typically:",
+      "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+      "answerIndex": 0,
+      "explanation": "Root element is directly accessible.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "hp-5",
+      "question": "A common heap bug with objects is:",
+      "options": [
+        "Using two loops",
+        "Missing explicit comparator by priority field",
+        "Calling push too often",
+        "Using maps with numbers"
+      ],
+      "answerIndex": 1,
+      "explanation": "Without comparator rules, object ordering may be incorrect.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hp-6",
+      "question": "Build heap from n values can be done in:",
+      "options": ["O(1)", "O(log n)", "O(n)", "O(n^2)"],
+      "answerIndex": 2,
+      "explanation": "Bottom-up heapify is linear-time overall.",
+      "difficulty": "hard"
+    }
+  ]
+}
+
+
